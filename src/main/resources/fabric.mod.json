@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "showserverlist",
+  "version": "${version}",
+  "name": "showserverlist",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/showserverlist/icon.png",
+  "environment": "client",
+  "entrypoints": {
+  },
+  "mixins": [
+    "showserverlist.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
