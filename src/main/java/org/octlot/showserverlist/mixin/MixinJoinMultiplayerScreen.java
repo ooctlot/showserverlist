@@ -1,12 +1,13 @@
 package org.octlot.showserverlist.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.LayoutElement;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.multiplayer.ServerData;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,20 +16,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(JoinMultiplayerScreen.class)
 public class MixinJoinMultiplayerScreen {
-    @Redirect(
-            method = "init",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/layouts/LinearLayout;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;)Lnet/minecraft/client/gui/layouts/LayoutElement;",
-                    ordinal = 2
-            )
-    )
-    public LayoutElement cancelAddChildJoin(LinearLayout instance, LayoutElement layoutElement) {
-        if (isInWorld()) {
-            return layoutElement;
-        }
-        return instance.addChild(layoutElement);
-    }
+    @Shadow
+    private Button selectButton;
+    @Unique
+    private Button directConnectionButton;
+
     @Redirect(
             method = "init",
             at = @At(
@@ -37,38 +29,35 @@ public class MixinJoinMultiplayerScreen {
                     ordinal = 3
             )
     )
-    public LayoutElement cancelAddChildDirect(LinearLayout instance, LayoutElement layoutElement) {
+    public LayoutElement showserverlist$redirectCreateDirectConnectButton(LinearLayout instance, LayoutElement child) {
         if (isInWorld()) {
-            return layoutElement;
+            this.directConnectionButton = (Button) child;
         }
-        return instance.addChild(layoutElement);
+        return instance.addChild(child);
     }
-
-    @Redirect(
-            method = "init",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/layouts/LinearLayout;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;)Lnet/minecraft/client/gui/layouts/LayoutElement;",
-                    ordinal = 4
-            )
-    )
-    public LayoutElement changeAddChildAddServer(LinearLayout instance, LayoutElement layoutElement, @Local(ordinal = 2) LinearLayout linearLayout3) {
-        if (isInWorld()) {
-            return linearLayout3.addChild(layoutElement);
-        }
-        return instance.addChild(layoutElement);
+    @Unique
+    private boolean isInWorld() {
+        return Minecraft.getInstance().player != null && Minecraft.getInstance().level != null;
     }
-
     @Inject(method = "join", at = @At("HEAD"), cancellable = true)
-    public void cancelJoin(ServerData serverData, CallbackInfo ci){
+    public void showserverlist$cancelJoin(ServerData data, CallbackInfo ci){
         if (isInWorld()) {
             ci.cancel();
         }
     }
+    @Inject(method = "init", at = @At("TAIL"))
+    public void showserverlist$onInit(CallbackInfo ci){
+        if (isInWorld()) {
+            this.selectButton.active = false;
+            this.directConnectionButton.active = false;
+        }
+    }
 
-
-    @Unique
-    private boolean isInWorld() {
-        return Minecraft.getInstance().player != null && Minecraft.getInstance().level != null;
+    @Inject(method = "onSelectedChange", at = @At("TAIL"))
+    public void showserverlist$onSelectedChange(CallbackInfo ci){
+        if (isInWorld()) {
+            this.selectButton.active = false;
+            this.directConnectionButton.active = false;
+        }
     }
 }
