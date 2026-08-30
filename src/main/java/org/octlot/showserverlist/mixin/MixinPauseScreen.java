@@ -18,7 +18,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinPauseScreen {
     @Inject(
             method = "createPauseMenu",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/layouts/LinearLayout;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;)Lnet/minecraft/client/gui/layouts/LayoutElement;", shift = At.Shift.AFTER, ordinal = 3)
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/layouts/LinearLayout;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;)Lnet/minecraft/client/gui/layouts/LayoutElement;",
+                    shift = At.Shift.AFTER,
+                    ordinal = 3
+            )
     )
     public void onInit(CallbackInfo ci, @Local(name = "iconButtonRow") LinearLayout iconButtonRow) {
         Screen currentScreen = (Screen) (Object) this;
