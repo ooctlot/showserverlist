@@ -6,8 +6,8 @@ plugins {
 
 def MOD_ID = "showserverlist"
 def MOD_NAME = "Show Server List"
-def MOD_DESCRIPTION = "???"
-def MOD_VERSION = "2.0.0"
+def MOD_DESCRIPTION = "Adds a button to the pause menu that opens the multiplayer server list."
+def MOD_VERSION = "2.0.1"
 
 def MINECRAFT_VERSION = project.minecraft
 def FABRIC_VERSION = project.fabric
