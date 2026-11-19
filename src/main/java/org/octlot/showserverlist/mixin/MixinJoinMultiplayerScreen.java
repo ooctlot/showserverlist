@@ -5,7 +5,9 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.LayoutElement;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.multiplayer.ServerSelectionList;
 import net.minecraft.client.multiplayer.ServerData;
+import org.octlot.showserverlist.ServerListMemory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,7 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(JoinMultiplayerScreen.class)
 public class MixinJoinMultiplayerScreen {
     @Shadow
-    private Button selectButton;
+    private Button joinButton;
+    @Shadow
+    protected ServerSelectionList serverSelectionList;
     @Unique
     private Button directConnectionButton;
 
@@ -47,16 +51,22 @@ public class MixinJoinMultiplayerScreen {
     }
     @Inject(method = "init", at = @At("TAIL"))
     public void showserverlist$onInit(CallbackInfo ci){
+        ServerListMemory.restore(this.serverSelectionList);
         if (isInWorld()) {
-            this.selectButton.active = false;
+            this.joinButton.active = false;
             this.directConnectionButton.active = false;
         }
+    }
+
+    @Inject(method = "removed", at = @At("HEAD"))
+    public void showserverlist$rememberListState(CallbackInfo ci){
+        ServerListMemory.save(this.serverSelectionList);
     }
 
     @Inject(method = "onSelectedChange", at = @At("TAIL"))
     public void showserverlist$onSelectedChange(CallbackInfo ci){
         if (isInWorld()) {
-            this.selectButton.active = false;
+            this.joinButton.active = false;
             this.directConnectionButton.active = false;
         }
     }
