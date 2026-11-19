@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(JoinMultiplayerScreen.class)
 public class MixinJoinMultiplayerScreen {
     @Shadow
-    private Button selectButton;
+    private Button joinButton;
     @Unique
     private Button directConnectionButton;
 
@@ -48,7 +48,7 @@ public class MixinJoinMultiplayerScreen {
     @Inject(method = "init", at = @At("TAIL"))
     public void showserverlist$onInit(CallbackInfo ci){
         if (isInWorld()) {
-            this.selectButton.active = false;
+            this.joinButton.active = false;
             this.directConnectionButton.active = false;
         }
     }
@@ -56,7 +56,7 @@ public class MixinJoinMultiplayerScreen {
     @Inject(method = "onSelectedChange", at = @At("TAIL"))
     public void showserverlist$onSelectedChange(CallbackInfo ci){
         if (isInWorld()) {
-            this.selectButton.active = false;
+            this.joinButton.active = false;
             this.directConnectionButton.active = false;
         }
     }
