@@ -1,0 +1,19 @@
+{
+  "showserverlist.folder.new": "New Folder",
+  "showserverlist.folder.move": "Move to Folder",
+  "showserverlist.folder.rename": "Rename Folder",
+  "showserverlist.folder.delete": "Delete Folder",
+  "showserverlist.folder.narration": "Folder %s, %s servers, %s",
+  "showserverlist.folder.state.expanded": "expanded",
+  "showserverlist.folder.state.collapsed": "collapsed",
+  "showserverlist.folder.name.new_title": "New Folder",
+  "showserverlist.folder.name.rename_title": "Rename Folder",
+  "showserverlist.folder.name.label": "Folder name",
+  "showserverlist.folder.name.hint": "e.g. Survival",
+  "showserverlist.folder.name.taken": "A folder with this name already exists.",
+  "showserverlist.folder.picker.title": "Move to Folder",
+  "showserverlist.folder.picker.none": "No folder",
+  "showserverlist.folder.picker.new": "New Folder...",
+  "showserverlist.folder.delete.title": "Delete this folder?",
+  "showserverlist.folder.delete.message": "\"%s\" will be removed. The servers inside are kept."
+}

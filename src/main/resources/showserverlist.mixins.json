@@ -6,8 +6,11 @@
   "mixins": [
   ],
   "client": [
+    "MixinAbstractSelectionListEntry",
     "MixinJoinMultiplayerScreen",
-    "MixinPauseScreen"
+    "MixinOnlineServerEntry",
+    "MixinPauseScreen",
+    "MixinServerSelectionList"
   ],
   "injectors": {
     "defaultRequire": 1

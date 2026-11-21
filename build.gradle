@@ -20,7 +20,8 @@ base {
     archivesName = MOD_ID
 }
 
-loom{
+loom {
+    accessWidenerPath = file("src/main/resources/showserverlist.accesswidener")
 }
 
 repositories {

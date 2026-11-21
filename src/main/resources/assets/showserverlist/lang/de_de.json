@@ -1,0 +1,19 @@
+{
+  "showserverlist.folder.new": "Neuer Ordner",
+  "showserverlist.folder.move": "In Ordner verschieben",
+  "showserverlist.folder.rename": "Ordner umbenennen",
+  "showserverlist.folder.delete": "Ordner löschen",
+  "showserverlist.folder.narration": "Ordner %s, %s Server, %s",
+  "showserverlist.folder.state.expanded": "aufgeklappt",
+  "showserverlist.folder.state.collapsed": "zugeklappt",
+  "showserverlist.folder.name.new_title": "Neuer Ordner",
+  "showserverlist.folder.name.rename_title": "Ordner umbenennen",
+  "showserverlist.folder.name.label": "Ordnername",
+  "showserverlist.folder.name.hint": "z. B. Survival",
+  "showserverlist.folder.name.taken": "Ein Ordner mit diesem Namen existiert bereits.",
+  "showserverlist.folder.picker.title": "In Ordner verschieben",
+  "showserverlist.folder.picker.none": "Kein Ordner",
+  "showserverlist.folder.picker.new": "Neuer Ordner...",
+  "showserverlist.folder.delete.title": "Diesen Ordner löschen?",
+  "showserverlist.folder.delete.message": "\"%s\" wird entfernt. Die Server darin bleiben erhalten."
+}

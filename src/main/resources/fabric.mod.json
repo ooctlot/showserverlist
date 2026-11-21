@@ -10,7 +10,9 @@
   "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
+    "client": ["org.octlot.showserverlist.ShowServerListClient"]
   },
+  "accessWidener": "showserverlist.accesswidener",
   "mixins": [
     "showserverlist.mixins.json"
   ],
