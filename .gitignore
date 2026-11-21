@@ -1,0 +1,14 @@
+# Gradle / build output
+.gradle/
+build/
+out/
+
+# Dev client working directory
+run/
+
+# IDE
+.idea/
+*.iml
+
+# Claude Code
+.claude/
